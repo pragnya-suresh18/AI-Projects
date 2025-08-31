@@ -6,29 +6,6 @@ It can:
 - **Extract action items** with speaker attribution and optional deadlines.
 - **Answer questions** about the meeting using grounded LLM-based Q&A.
 
----
-
-## 📂 Project Structure
-ai_meeting_insights_extractor/
-│
-├── app/ # FastAPI backend
-│ ├── main.py # API entrypoint
-│ ├── preprocess.py # Cleaning, speaker tokenization, chunking
-│ ├── model.py # Hugging Face summarizer
-│ ├── extract.py # Rule-based action item extractor
-│ └── schemas.py # Pydantic models
-│
-├── data/
-│ └── sample_transcripts/
-│ ├── sample1.txt
-│ ├── sample1.json # Ready-to-post body for /insights
-│ └── sample_uploadable.txt # File you can upload in Streamlit
-│
-├── requirements.txt
-├── Dockerfile
-├── streamlit_app.py # Streamlit UI
-└── README.md
-
 
 ---
 
