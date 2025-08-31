@@ -1,0 +1,36 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+meeting_assistant/
+.venv/
+venv/
+env/
+
+# macOS files
+.DS_Store
+
+# VSCode / IDE settings
+.vscode/
+.idea/
+
+# Streamlit cache
+.streamlit/
+
+# Logs
+*.log
+
+# Python packaging
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Local data that shouldn't be committed
+data/sample_transcripts/*.json
+data/sample_transcripts/*.txt
+!data/sample_transcripts/sample*.txt   # keep sample transcripts if you want
