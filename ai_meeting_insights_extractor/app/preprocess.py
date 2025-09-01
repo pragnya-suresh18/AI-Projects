@@ -39,8 +39,21 @@ def split_by_speaker(text: str) -> List[Tuple[str, str]]:
         items.append((current_speaker, " ".join(buffer).strip()))
     return items
 
-def normalize(text: str) -> str:
-    return re.sub(r"\s+", " ", text).strip()
+def normalize(text: str, keep_newlines: bool = True) -> str:
+    """
+    Standardize whitespace. If keep_newlines=True, keep line breaks so
+    split_by_speaker() can detect 'Speaker: ...' per line.
+    """
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    if keep_newlines:
+        lines = []
+        for ln in text.splitlines():
+            ln = re.sub(r"\s+", " ", ln).strip()
+            if ln:
+                lines.append(ln)
+        return "\n".join(lines).strip()
+    else:
+        return re.sub(r"\s+", " ", text).strip()
 
 def chunk_text(text: str, max_chars: int = 4000) -> List[str]:
     nlp = get_nlp()

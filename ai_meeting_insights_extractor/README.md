@@ -8,7 +8,21 @@ It can:
 
 
 ---
+## 📱 Screenshots
 
+### Main UI
+![Main UI Screenshot](assets/UI.png)
+
+### Processing
+![Processing Screenshot](assets/Generating.png)
+
+### Summary View
+![Summary Screenshot](assets/Summary.png)
+
+### Q&A Interface
+![Q&A Screenshot](assets/QnA.png)
+
+---
 ## Quickstart
 
 ### 1. Setup Environment
@@ -71,3 +85,5 @@ You can use transcripts exported from **Zoom** or **Microsoft Teams**.
 
 ### Supported Formats
 - `.txt` — drop in directly (recommended)
+
+

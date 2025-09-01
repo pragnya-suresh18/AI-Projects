@@ -15,16 +15,17 @@ with st.sidebar:
     model_name = st.selectbox(
         "Model",
         options=[
-            "google/flan-t5-small",
+            "facebook/bart-large-cnn",  # recommended
             "google/flan-t5-base",
-            "google/flan-t5-large"
+            "google/flan-t5-large",
+            "google/flan-t5-small",
         ],
-        index=1
+        index=0,
     )
     bullets = st.slider("Summary bullets", 3, 10, 5)
-    max_chunk_chars = st.number_input("Max chunk chars", 1000, 8000, 4000, step=500)
+    max_chunk_chars = st.number_input("Max chunk chars", 1000, 8000, 2000, step=500)
     st.markdown("---")
-    st.write("Tip: Use *small* for CPU-only laptops.")
+    st.write("Tip: Try BART first; use *small* T5 only on very low-resource machines.")
 
 tab1, tab2, tab3 = st.tabs(["📄 Upload", "📝 Summary & Actions", "❓ Q&A"])
 
@@ -39,29 +40,31 @@ with tab1:
         clear_btn = st.button("Clear")
 
     if clear_btn:
-        st.session_state.pop("summary", None)
-        st.session_state.pop("actions", None)
-        st.session_state.pop("transcript", None)
+        st.session_state.clear()
 
     if run_btn:
-        if uploaded is not None:
-            transcript = uploaded.read().decode("utf-8", errors="ignore")
-        else:
-            transcript = text_input
+        transcript = uploaded.read().decode("utf-8", errors="ignore") if uploaded else text_input
 
         if not transcript.strip():
             st.warning("Please upload or paste a transcript.")
         else:
-            text = normalize(transcript)
-            chunks = chunk_text(text, max_chars=int(max_chunk_chars))
+            # 1) For summarization: lighter normalization (can collapse newlines)
+            text_for_summary = normalize(transcript, keep_newlines=False)
+            chunks = chunk_text(text_for_summary, max_chars=int(max_chunk_chars))
+
             with st.status("Loading model and generating summary...", expanded=False):
                 summary = summarize_chunks(chunks, bullets=bullets, model_name=model_name)
-            with st.status("Extracting action items...", expanded=False):
-                actions = extract_action_items(text)
 
+            # 2) For action items: preserve newlines so speaker parsing works
+            text_for_actions = normalize(transcript, keep_newlines=True)
+            with st.status("Extracting action items...", expanded=False):
+                actions = extract_action_items(text_for_actions)
+
+            # Save for other tabs
             st.session_state["summary"] = summary
             st.session_state["actions"] = actions
-            st.session_state["transcript"] = text
+            # Use preserved-newlines transcript for Q&A grounding
+            st.session_state["transcript"] = text_for_actions
             st.success("Done! Check the next tab.")
 
 with tab2:
@@ -74,9 +77,20 @@ with tab2:
 
     st.subheader("Action Items")
     if "actions" in st.session_state:
-        if st.session_state["actions"]:
-            df = pd.DataFrame(st.session_state["actions"])
+        actions = st.session_state["actions"]
+        if actions:
+            # Prefer the reworded 'task' (falls back to raw 'item' if needed)
+            display_actions = []
+            for a in actions:
+                display_actions.append({
+                    "owner": a.get("speaker"),
+                    "task": a.get("task") or a.get("item"),
+                    "due": a.get("due"),
+                })
+            df = pd.DataFrame(display_actions)
             st.dataframe(df, use_container_width=True)
+
+           
         else:
             st.write("No action items detected.")
     else:
@@ -92,7 +106,6 @@ with tab3:
         elif not q.strip():
             st.warning("Type a question.")
         else:
-            # simple grounded Q&A using the same generator
             gen = get_generator(model_name)
             prompt = (
                 "Answer the question using ONLY the transcript below. "
