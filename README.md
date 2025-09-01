@@ -26,5 +26,5 @@ This repo serves as:
 
 ## 📬 Contact
 If you’re interested in collaborating, feel free to connect with me:  
-- **LinkedIn**: [linkedin.com/in/pragnya-suresh18](https://www.linkedin.com/in/pragnya-suresh18)  
+- **LinkedIn**: [linkedin.com/in/pragnyasuresh](https://www.linkedin.com/in/pragnyasuresh)  
 - **Email**: pragnyasuresh@gmail.com
