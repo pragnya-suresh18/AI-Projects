@@ -1,0 +1,62 @@
+# AWS Cloud Troubleshooting Assistant - Free Student Version
+# Python 3.11+ required
+
+# Core Data Science
+pandas>=2.1.0
+numpy>=1.24.0
+scipy>=1.11.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+plotly>=5.17.0
+
+# Jupyter & Development
+jupyter>=1.0.0
+notebook>=7.0.0
+ipywidgets>=8.1.0
+
+# Multi-Agent Framework (Choose ONE)
+# Option 1: LangGraph (Recommended)
+langgraph>=0.2.0
+langchain>=0.3.0
+langchain-community>=0.3.0
+
+# Option 2: CrewAI (Alternative)
+# crewai>=0.1.0
+# crewai-tools>=0.1.0
+
+# LLM Integration
+ollama>=0.3.0  # For local Ollama
+# openai>=1.0.0  # Uncomment if using OpenAI API
+
+# Vector Database for Knowledge Base
+chromadb>=0.4.0
+# faiss-cpu>=1.7.4  # Alternative to ChromaDB
+
+# Data Processing
+python-dateutil>=2.8.0
+pytz>=2023.3
+
+# Utilities
+pydantic>=2.0.0
+pyyaml>=6.0
+python-dotenv>=1.0.0
+tqdm>=4.66.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Optional: AWS SDK (only if migrating to AWS later)
+# boto3>=1.28.0
+# botocore>=1.31.0
+
+# Optional: Advanced ML (if needed)
+# scikit-learn>=1.3.0
+# statsmodels>=0.14.0
+
+
+
+
+

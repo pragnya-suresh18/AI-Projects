@@ -1,0 +1,108 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# Environment variables
+.env
+.env.local
+config.yaml
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Generated Data
+data/raw/
+data/processed/
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Outputs
+outputs/
+*.png
+*.jpg
+*.svg
+*.pdf
+!docs/images/
+
+# Logs
+logs/
+*.log
+
+# ChromaDB / Vector Database
+knowledge_base/embeddings/
+*.chroma/
+chroma_db/
+
+# Model files (if downloading any)
+models/
+*.bin
+*.gguf
+
+# Ollama (in case models are cached locally)
+.ollama/
+
+# Test coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# AWS credentials (if using AWS)
+.aws/
+credentials
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Large files
+*.csv
+*.parquet
+*.h5
+!data/sample/*.csv
+
+
+
+
+
