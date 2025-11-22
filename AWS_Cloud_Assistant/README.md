@@ -1,30 +1,96 @@
-# AI-Projects
 
-A collection of my AI/ML projects built while pursuing my **MS in Computer Science (AI)** at USC and through professional experience.  
-Each subfolder contains a self-contained project with code, instructions, and a README.
+AWS Incident Assistant
 
----
+A lightweight multi-agent on-call companion that analyzes real AWS CloudWatch logs and metrics, detects anomalies, and generates a clear incident summary with the most likely root cause and next steps.
 
-##  Getting Started
+Built using AWS Strands Agents, Amazon Q Developer, Amazon Kiro, AWS Lambda, CloudWatch, and Bedrock — all within the AWS Free Tier.
 
-Clone the repo:
-```bash
-git clone https://github.com/pragnya-suresh18/AI-Projects.git
-cd AI-Projects
-```
+⸻
 
-Each project has its own `README.md` with setup instructions.  
+What It Does
+	•	Polls CloudWatch metrics to detect latency spikes, error bursts, memory issues, and retry storms.
+	•	Fetches logs for the alert window and identifies patterns (timeouts, slow downstream calls, OOM events, retries).
+	•	Combines signals to produce a concise root cause explanation.
+	•	Shows a transparent analysis trace so engineers understand why a conclusion was reached.
+	•	Provides a simple UI with:
+	•	Alerts View
+	•	Incident View
+	•	Logs, metrics, agent summaries, and full reasoning steps.
+
+⸻
+
+How It Works
+
+Lambda → CloudWatch Logs + Metrics
+        ↓
+Metrics Analyst Agent → alerts
+        ↓
+Log Investigator Agent
+        ↓
+Root Cause & Fix Agent
+        ↓
+Incident View UI
+
+A demo Lambda generates realistic operational behavior so the system works with real AWS signals.
+
+⸻
+
+Built With AWS AI Tools
+
+Amazon Q Developer
+
+Used for:
+	•	scaffolding agent code
+	•	generating CloudWatch queries
+	•	validating boto3 calls
+	•	writing deployment scripts
+
+Amazon Kiro
+
+Used for:
+	•	spec-driven workflows
+	•	multi-step agent logic
+	•	code generation and refinement
+
+Screenshots included in submission.
+
+⸻
+
+Project Structure
+
+aws-incident-assistant/
+  agents/
+  tools/
+  orchestrator/
+  lambda/
+  ui/
+  docs/
+  README.md
 
 
-## 🎯 Purpose
-This repo serves as:
-- A portfolio of my AI/ML engineering projects.
-- A place to experiment with NLP, LLMs, AI Agents, MLOps, and applied AI ideas.
-- A foundation for sharing prototypes and demos.
+⸻
 
----
+Setup
 
-## 📬 Contact
-If you’re interested in collaborating, feel free to connect with me:  
-- **LinkedIn**: [linkedin.com/in/pragnya-suresh18](https://www.linkedin.com/in/pragnya-suresh18)  
-- **Email**: pragnyasuresh@gmail.com
+Deploy Lambda
+
+cd lambda
+sh deploy.sh
+
+Run Strands Agents
+
+strands agents run
+
+Open the UI
+
+Open alerts.html in a browser or serve via Flask.
+
+⸻
+
+Why This Project Matters
+	•	Uses real AWS telemetry in a practical way
+	•	Shows meaningful multi-agent collaboration
+	•	Provides explainability (thinking log)
+	•	Helpful to real on-call engineers
+	•	Free-tier friendly and easy to extend
+
